@@ -27,7 +27,7 @@ jobs:
         run: mvn clean package
 
       - name: upload artifact
-      - uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3
         with:
           name: sb-workflow-artifact
           path: sb-github-workflow.jar
@@ -60,14 +60,3 @@ jobs:
 
       - name: Push with tag
         run: docker push kazimhussain77/sb-github-workflow:${{ github.sha }}
-
-
-      #      - name: Rename the artifact
-      #        run: cp target/sb-github-workflow.jar sb-github-workflow-${{ github.sha }}.jar
-      #
-      #      - name: Save the artifact
-      #        uses: actions/upload-artifact@master
-      #        with:
-      #          name: sb-github-workflow
-      #          path: sb-github-workflow-${{ github.sha }}.jar
-
