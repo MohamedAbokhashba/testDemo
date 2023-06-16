@@ -30,7 +30,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: sb-workflow-artifact
-          path: sb-github-workflow.jar
+          path: target/sb-github-workflow.jar
 
       - name: Login to DockerHub
         uses: docker/login-action@v2.1.0
