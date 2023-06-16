@@ -26,6 +26,12 @@ jobs:
       - name: Build & test with Maven
         run: mvn clean package
 
+      - name: upload artifact
+      - uses: actions/upload-artifact@v3
+        with:
+          name: sb-workflow-artifact
+          path: sb-github-workflow.jar
+
       - name: Login to DockerHub
         uses: docker/login-action@v2.1.0
         with:
@@ -33,10 +39,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           # logout: true
 
-#      - name: docker image tag
-#        run: |
-#          docker build -t ${{ secrets.DOCKER_USERNAME }}/sb-github-workflow:${GITHUB_SHA::8} .
-#          docker push ${{ secrets.DOCKER_USERNAME }}/sb-github-workflow:${GITHUB_SHA::8}
+      #      - name: docker image tag
+      #        run: |
+      #          docker build -t ${{ secrets.DOCKER_USERNAME }}/sb-github-workflow:${GITHUB_SHA::8} .
+      #          docker push ${{ secrets.DOCKER_USERNAME }}/sb-github-workflow:${GITHUB_SHA::8}
 
       - name: Build and push action
         uses: docker/build-push-action@v4
@@ -46,7 +52,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags:  kazimhussain77/sb-github-workflow:latest
+          tags: kazimhussain77/sb-github-workflow:latest
 
 
       - name: Build with tag
@@ -54,6 +60,7 @@ jobs:
 
       - name: Push with tag
         run: docker push kazimhussain77/sb-github-workflow:${{ github.sha }}
+
 
       #      - name: Rename the artifact
       #        run: cp target/sb-github-workflow.jar sb-github-workflow-${{ github.sha }}.jar
