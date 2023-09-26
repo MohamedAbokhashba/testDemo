@@ -14,3 +14,5 @@
 
 
 - Login with Docker Hub and verify 2 image will come , one with latest and 2nd with the commit tag
+
+- 
